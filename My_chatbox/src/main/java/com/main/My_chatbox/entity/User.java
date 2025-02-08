@@ -1,38 +1,49 @@
 package com.main.My_chatbox.entity;
 
-import jakarta.persistence.*;
-import lombok.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
-@Data
 @Entity
+@Table(name = "user")
 public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
-    @Column(unique = true, nullable = false)
-    private String username;
+	@Id
+	@Column(name = "user_id", length = 255)
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int userid;
 
-    @Column(nullable = false)
-    private String password;
+	@Column(name = "user_name", length = 255)
+	private String username;
 
-    public User() {
+	@Column(name = "user_email", length = 255)
+	private String email;
 
-	}
+	@Column(name = "password", length = 255)
+	private String password;
+	
+//    @Version
+//    private Integer version;
 
-	public User(Long id, String username, String password, String email) {
-		this.id = id;
+	public User(int userid, String username, String email, String password) {
+		this.userid = userid;
 		this.username = username;
-		this.password = password;
 		this.email = email;
+		this.password = password;
 	}
 
-	public Long getId() {
-		return id;
+	public User() {
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public int getUserid() {
+		return userid;
+	}
+
+	public void setUserid(int userid) {
+		this.userid = userid;
 	}
 
 	public String getUsername() {
@@ -43,14 +54,6 @@ public class User {
 		this.username = username;
 	}
 
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
 	public String getEmail() {
 		return email;
 	}
@@ -59,6 +62,18 @@ public class User {
 		this.email = email;
 	}
 
-	@Column(nullable = false)
-    private String email;
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	@Override
+	public String toString() {
+		return "User [userid=" + userid + ", username=" + username + ", email=" + email + ", password=" + password
+				+ "]";
+	}
+
 }
